@@ -252,7 +252,7 @@ for (const pet of pets) {
   <img src="${pet.imageUrl}" alt="Card image cap">
     <p class="pet-color">${pet.color}</p>
     <p class="pet-skill">${pet.specialSkill}</p>
-    <p class="pet-type">${pet.type}</p>
+    <p class="pet-type ${pet.type}">${pet.type}</p>
 </div>`
 }
 app.innerHTML = domString;
