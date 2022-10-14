@@ -244,6 +244,8 @@ const pets = [
 
 const app = document.querySelector('#app');
 const type = document.getElementsByClassName('pet-type');
+const buttonWrap = document.querySelector('.btns');
+const buttons = buttonWrap.querySelectorAll('.btn');
 
 let domString = "";
 for (const pet of pets) {
@@ -256,3 +258,17 @@ for (const pet of pets) {
 </div>`
 }
 app.innerHTML = domString;
+
+
+//Buttons:
+buttons.forEach(e => {
+  e.addEventListener('click', function () {
+    if (this.id === 'btn-cat') {
+      console.log('Cat Pooop')
+    } else if (this.id === 'btn-dog') {
+      console.log('Dog Pooop')
+    } else if (this.id === 'btn-dino') {
+      console.log('BIIIG Pooop')
+    }
+  })
+})
