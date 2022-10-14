@@ -96,3 +96,8 @@ img {
 .btn-info:hover {
   color: white;
 }
+
+#btn-cat:active,
+#btn-dino:active {
+  color: white;
+}
