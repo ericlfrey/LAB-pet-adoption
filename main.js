@@ -244,6 +244,7 @@ const pets = [
 
 const app = document.querySelector('#app');
 const type = document.getElementsByClassName('pet-type');
+const button = document.querySelectorAll("button");
 
 let domString = "";
 for (const pet of pets) {
@@ -256,3 +257,11 @@ for (const pet of pets) {
 </div>`
 }
 app.innerHTML = domString;
+
+
+//Buttons:
+button.forEach(click)
+
+function click() {
+  console.log('Poops')
+}
