@@ -37,7 +37,7 @@ const pets = [
     color: "Brown",
     specialSkill: "Comfortable in the outdoors for up to eight hours.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 6,
@@ -133,7 +133,7 @@ const pets = [
     color: "Yellow",
     specialSkill: "Does not freak out if you haven’t seen his favorite movie (The Big Lebowski).",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 18,
@@ -157,7 +157,7 @@ const pets = [
     color: "Black",
     specialSkill: "Uses litter box at appropriate hours.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 21,
@@ -173,7 +173,7 @@ const pets = [
     color: "Orange",
     specialSkill: "Is comfortable with jokes about his receding hairline.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 23,
@@ -197,7 +197,7 @@ const pets = [
     color: "Red",
     specialSkill: "Knows the words to 4 rap songs.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 26,
@@ -247,28 +247,71 @@ const type = document.getElementsByClassName('pet-type');
 const buttonWrap = document.querySelector('.btns');
 const buttons = buttonWrap.querySelectorAll('.btn');
 
-let domString = "";
-for (const pet of pets) {
-  domString += `<div class="card" style="width: 18rem;">
+const renderToDom = (divId, htmlToRender) => {
+  const selectedDiv = document.querySelector(divId);
+  selectedDiv.innerHTML = htmlToRender;
+};
+
+const petFilter = (arr, petType) => {
+  const petArr = [];
+  for (const pet of arr) {
+    if (pet.type === petType)
+      petArr.push(pet);
+  }
+  return petArr;
+}
+
+const cardsOnDom = (arr) => {
+  let domString = "";
+  for (const pet of arr) {
+    domString += `<div class="card" style="width: 18rem;">
   <h5 class="card-title">${pet.name}</h5>
   <img src="${pet.imageUrl}" alt="Card image cap">
     <p class="pet-color">${pet.color}</p>
     <p class="pet-skill">${pet.specialSkill}</p>
     <p class="pet-type ${pet.type}">${pet.type}</p>
 </div>`
+  }
+  renderToDom("#app", domString);
 }
-app.innerHTML = domString;
-
+// cardsOnDom(pets);
 
 //Buttons:
-buttons.forEach(e => {
-  e.addEventListener('click', function () {
-    if (this.id === 'btn-cat') {
-      console.log('Cat Pooop')
-    } else if (this.id === 'btn-dog') {
-      console.log('Dog Pooop')
-    } else if (this.id === 'btn-dino') {
-      console.log('BIIIG Pooop')
-    }
-  })
+const catBtn = document.querySelector('#btn-cat');
+const dogBtn = document.querySelector('#btn-dog');
+const dinoBtn = document.querySelector('#btn-dino');
+const showAllBtn = document.querySelector('#btn-all');
+const showForm = document.querySelector('#btn-form');
+
+const hideBtns = document.getElementsByClassName("hide");
+
+
+catBtn.addEventListener('click', () => {
+  const catCards = petFilter(pets, 'cat');
+  hideBtns.forEach(btn => btn.style.display = 'none');
+  cardsOnDom(catCards);
 })
+dogBtn.addEventListener('click', () => {
+  const dogCards = petFilter(pets, 'dog');
+  cardsOnDom(dogCards);
+})
+dinoBtn.addEventListener('click', () => {
+  const dinoCards = petFilter(pets, 'dino');
+  cardsOnDom(dinoCards);
+})
+showAllBtn.addEventListener('click', () => {
+  cardsOnDom(pets);
+})
+
+
+  // buttons.forEach(e => {
+  //   e.addEventListener('click', function () {
+  //     if (this.id === 'btn-cat') {
+  //       console.log('Cat Pooop')
+  //     } else if (this.id === 'btn-dog') {
+  //       console.log('Dog Pooop')
+  //     } else if (this.id === 'btn-dino') {
+  //       console.log('BIIIG Pooop')
+  //     }
+  //   })
+  // })
