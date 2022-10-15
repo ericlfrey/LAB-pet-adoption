@@ -275,6 +275,28 @@ const cardsOnDom = (arr) => {
   renderToDom("#app", domString);
 }
 // cardsOnDom(pets);
+//Form:
+const formOnDom = () => {
+  const formString = `<form>
+  <div class="form-group">
+    <input id="name" class="form-control" type="text" placeholder="Name:" required>
+  </div>
+  <div class="form-group">
+    <input id="color" class="form-control" type="text" placeholder="Color:" required>
+  </div>
+  <div class="form-group">
+    <input id="specialSkill" class="form-control" type="text" placeholder="Special Skill:" required>
+  </div>
+  <div class="form-group">
+    <input id="type" class="form-control" type="text" placeholder="Type of Pet:" required>
+  </div>
+  <div class="form-group">
+    <input id="imageUrl" class="form-control" type="text" placeholder="Image URL:" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>`;
+  renderToDom("#app", formString);
+};
 
 //Buttons:
 const catBtn = document.querySelector('#btn-cat');
@@ -282,13 +304,14 @@ const dogBtn = document.querySelector('#btn-dog');
 const dinoBtn = document.querySelector('#btn-dino');
 const showAllBtn = document.querySelector('#btn-all');
 const showForm = document.querySelector('#btn-form');
-
-const hideBtns = document.getElementsByClassName("hide");
+const filterBtns = document.querySelectorAll('.btn-filter')
 
 
 catBtn.addEventListener('click', () => {
   const catCards = petFilter(pets, 'cat');
-  hideBtns.forEach(btn => btn.style.display = 'none');
+  // filterBtns.forEach((e) => {
+  //   e.classList.add('hide');
+  // })
   cardsOnDom(catCards);
 })
 dogBtn.addEventListener('click', () => {
@@ -301,6 +324,13 @@ dinoBtn.addEventListener('click', () => {
 })
 showAllBtn.addEventListener('click', () => {
   cardsOnDom(pets);
+  // filterBtns.forEach((e) => {
+  //   e.classList.remove('hide');
+  // })
+})
+
+showForm.addEventListener('click', () => {
+  formOnDom();
 })
 
 
