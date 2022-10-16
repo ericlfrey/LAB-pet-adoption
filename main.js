@@ -246,6 +246,16 @@ const app = document.querySelector('#app');
 const type = document.getElementsByClassName('pet-type');
 const buttonWrap = document.querySelector('.btns');
 const buttons = buttonWrap.querySelectorAll('.btn');
+const catBtn = document.querySelector('#btn-cat');
+const dogBtn = document.querySelector('#btn-dog');
+const dinoBtn = document.querySelector('#btn-dino');
+const showAllBtn = document.querySelector('#btn-all');
+const showForm = document.querySelector('#btn-form');
+const filterBtns = document.querySelectorAll('.btn-filter')
+const form = document.querySelector('form');
+const submitBtn = document.querySelector('#btn-submit')
+
+
 
 const renderToDom = (divId, htmlToRender) => {
   const selectedDiv = document.querySelector(divId);
@@ -277,34 +287,32 @@ const cardsOnDom = (arr) => {
 // cardsOnDom(pets);
 //Form:
 const formOnDom = () => {
-  const formString = `<form>
-  <div class="form-group">
-    <input id="name" class="form-control" type="text" placeholder="Name:" required>
-  </div>
-  <div class="form-group">
-    <input id="color" class="form-control" type="text" placeholder="Color:" required>
-  </div>
-  <div class="form-group">
-    <input id="specialSkill" class="form-control" type="text" placeholder="Special Skill:" required>
-  </div>
-  <div class="form-group">
-    <input id="type" class="form-control" type="text" placeholder="Type of Pet:" required>
-  </div>
-  <div class="form-group">
-    <input id="imageUrl" class="form-control" type="text" placeholder="Image URL:" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>`;
+  const formString = `<div class="form-wrapper">
+  <form>
+    <div class="form-group">
+      <input id="name" class="form-control" type="text" placeholder="Name:" required>
+    </div>
+    <div class="form-group">
+      <input id="color" class="form-control" type="text" placeholder="Color:" required>
+    </div>
+    <div class="form-group">
+      <input id="specialSkill" class="form-control" type="text" placeholder="Special Skill:" required>
+    </div>
+    <div class="form-group">
+      <input id="type" class="form-control" type="text" placeholder="Type of Pet:" required>
+    </div>
+    <div class="form-group">
+      <input id="imageUrl" class="form-control" type="text" placeholder="Image URL:" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>  
+</div>
+`;
   renderToDom("#app", formString);
 };
 
+
 //Buttons:
-const catBtn = document.querySelector('#btn-cat');
-const dogBtn = document.querySelector('#btn-dog');
-const dinoBtn = document.querySelector('#btn-dino');
-const showAllBtn = document.querySelector('#btn-all');
-const showForm = document.querySelector('#btn-form');
-const filterBtns = document.querySelectorAll('.btn-filter')
 
 
 catBtn.addEventListener('click', () => {
@@ -329,19 +337,24 @@ showAllBtn.addEventListener('click', () => {
   // })
 })
 
-showForm.addEventListener('click', () => {
-  formOnDom();
-})
+// showForm.addEventListener('click', () => {
+//   formOnDom();
+// })
 
 
-  // buttons.forEach(e => {
-  //   e.addEventListener('click', function () {
-  //     if (this.id === 'btn-cat') {
-  //       console.log('Cat Pooop')
-  //     } else if (this.id === 'btn-dog') {
-  //       console.log('Dog Pooop')
-  //     } else if (this.id === 'btn-dino') {
-  //       console.log('BIIIG Pooop')
-  //     }
-  //   })
-  // })
+const newPet = (event) => {
+  event.preventDefault();
+  const petObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    color: document.querySelector("#color").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value,
+    imageUrl: document.querySelector("#imageUrl").value
+  };
+  pets.push(petObj);
+  cardsOnDom(pets);
+  // console.table(pets)
+  form.reset();
+}
+form.addEventListener('submit', newPet);
