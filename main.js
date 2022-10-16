@@ -240,8 +240,7 @@ const pets = [
     imageUrl: "https://media.istockphoto.com/photos/stegosaurus-forest-scene-3d-illustration-picture-id1168444910?s=170667a"
   }
 ];
-
-
+// Element Queries:
 const app = document.querySelector('#app');
 const type = document.getElementsByClassName('pet-type');
 const buttonWrap = document.querySelector('.btns');
@@ -251,26 +250,18 @@ const dogBtn = document.querySelector('#btn-dog');
 const dinoBtn = document.querySelector('#btn-dino');
 const showAllBtn = document.querySelector('#btn-all');
 const showForm = document.querySelector('#btn-form');
-const filterBtns = document.querySelectorAll('.btn-filter')
+const filterBtns = document.querySelectorAll('.btn-filter');
 const form = document.querySelector('form');
-const submitBtn = document.querySelector('#btn-submit')
+const submitBtn = document.querySelector('#btn-submit');
+const deleteBtn = document.querySelector('#btn-delete');
 
 
-
+// Function to render HTML on page- Called inside cardsOnDom
 const renderToDom = (divId, htmlToRender) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = htmlToRender;
 };
-
-const petFilter = (arr, petType) => {
-  const petArr = [];
-  for (const pet of arr) {
-    if (pet.type === petType)
-      petArr.push(pet);
-  }
-  return petArr;
-}
-
+// Function to display the cards on the DOM
 const cardsOnDom = (arr) => {
   let domString = "";
   for (const pet of arr) {
@@ -279,47 +270,43 @@ const cardsOnDom = (arr) => {
   <img src="${pet.imageUrl}" alt="Card image cap">
     <p class="pet-color">${pet.color}</p>
     <p class="pet-skill">${pet.specialSkill}</p>
+    <div class="bottom-container">
+    <button id="delete-${pet.id}" type="button" class="btn btn-danger">Delete</button>
     <p class="pet-type ${pet.type}">${pet.type}</p>
+    </div>
 </div>`
   }
   renderToDom("#app", domString);
 }
+
+// Function to filter pet by type
+const petFilter = (arr, petType) => {
+  const petArr = [];
+  for (const pet of arr) {
+    if (pet.type === petType)
+      petArr.push(pet);
+  }
+  return petArr;
+}
+// Function to create a new Pet Card
+const newPet = (event) => {
+  event.preventDefault();
+  const petObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    color: document.querySelector("#color").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value,
+    imageUrl: document.querySelector("#imageUrl").value
+  };
+  pets.push(petObj);
+  cardsOnDom(pets);
+  form.reset();
+}
+// Calling the cardsOnDom function on Page Load
 cardsOnDom(pets);
-//Form:
-// const formOnDom = () => {
-//   const formString = `<div class="form-wrapper">
-//   <form>
-//     <div class="form-group">
-//       <input id="name" class="form-control" type="text" placeholder="Name:" required>
-//     </div>
-//     <div class="form-group">
-//       <input id="color" class="form-control" type="text" placeholder="Color:" required>
-//     </div>
-//     <div class="form-group">
-//       <input id="specialSkill" class="form-control" type="text" placeholder="Special Skill:" required>
-//     </div>
-//     <div class="form-group pet-select">
-//       <select class="text-secondary" id="inlineFormCustomSelect" required>
-//         <option selected>Type of Pet</option>
-//         <option value="cat">Cat</option>
-//         <option value="dog">Dog</option>
-//         <option value="dino">Dino</option>
-//       </select>
-//     </div>
-//     <div class="form-group">
-//       <input id="imageUrl" class="form-control" type="text" placeholder="Image URL:" required>
-//     </div>
-//     <button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
-//   </form>  
-// </div>
-// `;
-//   renderToDom("#form-container", formString);
-// };
 
-
-//Buttons:
-
-
+// Event Listeners for the Buttons
 catBtn.addEventListener('click', () => {
   const catCards = petFilter(pets, 'cat');
   cardsOnDom(catCards);
@@ -335,24 +322,15 @@ dinoBtn.addEventListener('click', () => {
 showAllBtn.addEventListener('click', () => {
   cardsOnDom(pets);
 })
-
-// showForm.addEventListener('click', () => {
-//   formOnDom();
-// })
-
-
-const newPet = (event) => {
-  event.preventDefault();
-  const petObj = {
-    id: pets.length + 1,
-    name: document.querySelector("#name").value,
-    color: document.querySelector("#color").value,
-    specialSkill: document.querySelector("#specialSkill").value,
-    type: document.querySelector("#type").value,
-    imageUrl: document.querySelector("#imageUrl").value
-  };
-  pets.push(petObj);
-  cardsOnDom(pets);
-  form.reset();
-}
 form.addEventListener('submit', newPet);
+app.addEventListener('click', (e) => {
+  if (e.target.id.includes('delete')) {
+    const targetId = e.target.id;
+    const idNum = parseInt(targetId.replace(/\D/g, ''), 0);
+    const indexOfObj = pets.findIndex((object) => {
+      return object.id === idNum;
+    })
+    pets.splice(indexOfObj, 1);
+    cardsOnDom(pets);
+  }
+});
