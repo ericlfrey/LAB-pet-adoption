@@ -284,32 +284,37 @@ const cardsOnDom = (arr) => {
   }
   renderToDom("#app", domString);
 }
-// cardsOnDom(pets);
+cardsOnDom(pets);
 //Form:
-const formOnDom = () => {
-  const formString = `<div class="form-wrapper">
-  <form>
-    <div class="form-group">
-      <input id="name" class="form-control" type="text" placeholder="Name:" required>
-    </div>
-    <div class="form-group">
-      <input id="color" class="form-control" type="text" placeholder="Color:" required>
-    </div>
-    <div class="form-group">
-      <input id="specialSkill" class="form-control" type="text" placeholder="Special Skill:" required>
-    </div>
-    <div class="form-group">
-      <input id="type" class="form-control" type="text" placeholder="Type of Pet:" required>
-    </div>
-    <div class="form-group">
-      <input id="imageUrl" class="form-control" type="text" placeholder="Image URL:" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>  
-</div>
-`;
-  renderToDom("#app", formString);
-};
+// const formOnDom = () => {
+//   const formString = `<div class="form-wrapper">
+//   <form>
+//     <div class="form-group">
+//       <input id="name" class="form-control" type="text" placeholder="Name:" required>
+//     </div>
+//     <div class="form-group">
+//       <input id="color" class="form-control" type="text" placeholder="Color:" required>
+//     </div>
+//     <div class="form-group">
+//       <input id="specialSkill" class="form-control" type="text" placeholder="Special Skill:" required>
+//     </div>
+//     <div class="form-group pet-select">
+//       <select class="text-secondary" id="inlineFormCustomSelect" required>
+//         <option selected>Type of Pet</option>
+//         <option value="cat">Cat</option>
+//         <option value="dog">Dog</option>
+//         <option value="dino">Dino</option>
+//       </select>
+//     </div>
+//     <div class="form-group">
+//       <input id="imageUrl" class="form-control" type="text" placeholder="Image URL:" required>
+//     </div>
+//     <button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
+//   </form>  
+// </div>
+// `;
+//   renderToDom("#form-container", formString);
+// };
 
 
 //Buttons:
@@ -317,9 +322,6 @@ const formOnDom = () => {
 
 catBtn.addEventListener('click', () => {
   const catCards = petFilter(pets, 'cat');
-  // filterBtns.forEach((e) => {
-  //   e.classList.add('hide');
-  // })
   cardsOnDom(catCards);
 })
 dogBtn.addEventListener('click', () => {
@@ -332,9 +334,6 @@ dinoBtn.addEventListener('click', () => {
 })
 showAllBtn.addEventListener('click', () => {
   cardsOnDom(pets);
-  // filterBtns.forEach((e) => {
-  //   e.classList.remove('hide');
-  // })
 })
 
 // showForm.addEventListener('click', () => {
@@ -354,7 +353,6 @@ const newPet = (event) => {
   };
   pets.push(petObj);
   cardsOnDom(pets);
-  // console.table(pets)
   form.reset();
 }
 form.addEventListener('submit', newPet);
