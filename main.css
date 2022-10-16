@@ -9,8 +9,6 @@ header {
   margin-top: 20px;
 }
 
-/* h1 {} */
-
 #app {
   display: flex;
   flex-wrap: wrap;
@@ -51,8 +49,6 @@ img {
 }
 
 .pet-type {
-  /* background-color: rgba(173, 216, 230, 0.5); */
-
   width: 100%;
   margin: 0;
   margin-top: auto;
@@ -74,9 +70,9 @@ img {
 }
 
 .btns {
-  width: 40%;
-  margin-left: 30%;
-  margin-right: 30%;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
@@ -100,4 +96,25 @@ img {
 #btn-cat:active,
 #btn-dino:active {
   color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  text-align: center;
+}
+
+select {
+  width: 100%;
+  padding: 7.5px 15px;
+  border-radius: 5px;
+  border: none;
 }

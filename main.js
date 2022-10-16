@@ -37,7 +37,7 @@ const pets = [
     color: "Brown",
     specialSkill: "Comfortable in the outdoors for up to eight hours.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 6,
@@ -133,7 +133,7 @@ const pets = [
     color: "Yellow",
     specialSkill: "Does not freak out if you haven’t seen his favorite movie (The Big Lebowski).",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 18,
@@ -157,7 +157,7 @@ const pets = [
     color: "Black",
     specialSkill: "Uses litter box at appropriate hours.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 21,
@@ -173,7 +173,7 @@ const pets = [
     color: "Orange",
     specialSkill: "Is comfortable with jokes about his receding hairline.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 23,
@@ -197,7 +197,7 @@ const pets = [
     color: "Red",
     specialSkill: "Knows the words to 4 rap songs.",
     type: "cat",
-    imageUrl: "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg"
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/01/96/39/24/1000_F_196392453_iUZNmPtxsXPhojoKuehMcz4uF9GfbwgA.jpg"
   },
   {
     id: 26,
@@ -246,29 +246,113 @@ const app = document.querySelector('#app');
 const type = document.getElementsByClassName('pet-type');
 const buttonWrap = document.querySelector('.btns');
 const buttons = buttonWrap.querySelectorAll('.btn');
+const catBtn = document.querySelector('#btn-cat');
+const dogBtn = document.querySelector('#btn-dog');
+const dinoBtn = document.querySelector('#btn-dino');
+const showAllBtn = document.querySelector('#btn-all');
+const showForm = document.querySelector('#btn-form');
+const filterBtns = document.querySelectorAll('.btn-filter')
+const form = document.querySelector('form');
+const submitBtn = document.querySelector('#btn-submit')
 
-let domString = "";
-for (const pet of pets) {
-  domString += `<div class="card" style="width: 18rem;">
+
+
+const renderToDom = (divId, htmlToRender) => {
+  const selectedDiv = document.querySelector(divId);
+  selectedDiv.innerHTML = htmlToRender;
+};
+
+const petFilter = (arr, petType) => {
+  const petArr = [];
+  for (const pet of arr) {
+    if (pet.type === petType)
+      petArr.push(pet);
+  }
+  return petArr;
+}
+
+const cardsOnDom = (arr) => {
+  let domString = "";
+  for (const pet of arr) {
+    domString += `<div class="card" style="width: 18rem;">
   <h5 class="card-title">${pet.name}</h5>
   <img src="${pet.imageUrl}" alt="Card image cap">
     <p class="pet-color">${pet.color}</p>
     <p class="pet-skill">${pet.specialSkill}</p>
     <p class="pet-type ${pet.type}">${pet.type}</p>
 </div>`
+  }
+  renderToDom("#app", domString);
 }
-app.innerHTML = domString;
+cardsOnDom(pets);
+//Form:
+// const formOnDom = () => {
+//   const formString = `<div class="form-wrapper">
+//   <form>
+//     <div class="form-group">
+//       <input id="name" class="form-control" type="text" placeholder="Name:" required>
+//     </div>
+//     <div class="form-group">
+//       <input id="color" class="form-control" type="text" placeholder="Color:" required>
+//     </div>
+//     <div class="form-group">
+//       <input id="specialSkill" class="form-control" type="text" placeholder="Special Skill:" required>
+//     </div>
+//     <div class="form-group pet-select">
+//       <select class="text-secondary" id="inlineFormCustomSelect" required>
+//         <option selected>Type of Pet</option>
+//         <option value="cat">Cat</option>
+//         <option value="dog">Dog</option>
+//         <option value="dino">Dino</option>
+//       </select>
+//     </div>
+//     <div class="form-group">
+//       <input id="imageUrl" class="form-control" type="text" placeholder="Image URL:" required>
+//     </div>
+//     <button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
+//   </form>  
+// </div>
+// `;
+//   renderToDom("#form-container", formString);
+// };
 
 
 //Buttons:
-buttons.forEach(e => {
-  e.addEventListener('click', function () {
-    if (this.id === 'btn-cat') {
-      console.log('Cat Pooop')
-    } else if (this.id === 'btn-dog') {
-      console.log('Dog Pooop')
-    } else if (this.id === 'btn-dino') {
-      console.log('BIIIG Pooop')
-    }
-  })
+
+
+catBtn.addEventListener('click', () => {
+  const catCards = petFilter(pets, 'cat');
+  cardsOnDom(catCards);
 })
+dogBtn.addEventListener('click', () => {
+  const dogCards = petFilter(pets, 'dog');
+  cardsOnDom(dogCards);
+})
+dinoBtn.addEventListener('click', () => {
+  const dinoCards = petFilter(pets, 'dino');
+  cardsOnDom(dinoCards);
+})
+showAllBtn.addEventListener('click', () => {
+  cardsOnDom(pets);
+})
+
+// showForm.addEventListener('click', () => {
+//   formOnDom();
+// })
+
+
+const newPet = (event) => {
+  event.preventDefault();
+  const petObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    color: document.querySelector("#color").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value,
+    imageUrl: document.querySelector("#imageUrl").value
+  };
+  pets.push(petObj);
+  cardsOnDom(pets);
+  form.reset();
+}
+form.addEventListener('submit', newPet);
