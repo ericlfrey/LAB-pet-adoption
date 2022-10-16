@@ -279,6 +279,7 @@ const cardsOnDom = (arr) => {
   <img src="${pet.imageUrl}" alt="Card image cap">
     <p class="pet-color">${pet.color}</p>
     <p class="pet-skill">${pet.specialSkill}</p>
+    <button type="button" class="btn btn-danger">Delete</button>
     <p class="pet-type ${pet.type}">${pet.type}</p>
 </div>`
   }
