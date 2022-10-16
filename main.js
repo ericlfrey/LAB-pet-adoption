@@ -271,7 +271,7 @@ const cardsOnDom = (arr) => {
     <p class="pet-color">${pet.color}</p>
     <p class="pet-skill">${pet.specialSkill}</p>
     <div class="bottom-container">
-    <button id="btn-delete" type="button" class="btn btn-danger">Delete</button>
+    <button id="delete-${pet.id}" type="button" class="btn btn-danger">Delete</button>
     <p class="pet-type ${pet.type}">${pet.type}</p>
     </div>
 </div>`
@@ -323,7 +323,14 @@ showAllBtn.addEventListener('click', () => {
   cardsOnDom(pets);
 })
 form.addEventListener('submit', newPet);
-
-deleteBtn.addEventListener('click', () => {
-  console.log('Delete Pet');
-})
+app.addEventListener('click', (e) => {
+  if (e.target.id.includes('delete')) {
+    const targetId = e.target.id;
+    const idNum = parseInt(targetId.replace(/\D/g, ''), 0);
+    const indexOfObj = pets.findIndex((object) => {
+      return object.id === idNum;
+    })
+    pets.splice(indexOfObj, 1);
+    cardsOnDom(pets);
+  }
+});
