@@ -242,19 +242,12 @@ const pets = [
 ];
 // Element Queries:
 const app = document.querySelector('#app');
-const type = document.getElementsByClassName('pet-type');
-const buttonWrap = document.querySelector('.btns');
-const buttons = buttonWrap.querySelectorAll('.btn');
 const catBtn = document.querySelector('#btn-cat');
 const dogBtn = document.querySelector('#btn-dog');
 const dinoBtn = document.querySelector('#btn-dino');
 const showAllBtn = document.querySelector('#btn-all');
-const showForm = document.querySelector('#btn-form');
-const filterBtns = document.querySelectorAll('.btn-filter');
-const form = document.querySelector('form');
-const submitBtn = document.querySelector('#btn-submit');
 const deleteBtn = document.querySelector('#btn-delete');
-
+const form = document.querySelector('form');
 
 // Function to render HTML on page- Called inside cardsOnDom
 const renderToDom = (divId, htmlToRender) => {
@@ -278,7 +271,6 @@ const cardsOnDom = (arr) => {
   }
   renderToDom("#app", domString);
 }
-
 // Function to filter pet by type
 const petFilter = (arr, petType) => {
   const petArr = [];
@@ -303,6 +295,7 @@ const newPet = (event) => {
   cardsOnDom(pets);
   form.reset();
 }
+
 // Calling the cardsOnDom function on Page Load
 cardsOnDom(pets);
 
