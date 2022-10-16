@@ -288,7 +288,7 @@ const newPet = (event) => {
     name: document.querySelector("#name").value,
     color: document.querySelector("#color").value,
     specialSkill: document.querySelector("#specialSkill").value,
-    type: document.querySelector("#type").value,
+    type: document.querySelector("#type").value.toLowerCase(),
     imageUrl: document.querySelector("#imageUrl").value
   };
   pets.push(petObj);
