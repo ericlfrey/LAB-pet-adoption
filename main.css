@@ -1,11 +1,12 @@
 body {
-  background-image: linear-gradient(to right, rgba(136, 231, 223, 0.5), rgba(57, 234, 110, 0.5));
+  /* background-image: linear-gradient(to right, rgba(136, 212, 231, 0.5), rgba(209, 171, 233, 0.5)); */
+  background-color: #daebfc;
   color: gray;
 }
 
 header {
   text-align: center;
-  text-shadow: 1px 1px 1px rgb(48, 12, 132);
+  text-shadow: 1px 1px 1px black;
   margin-top: 20px;
   font-style: italic;
 }
@@ -132,10 +133,16 @@ form {
   border-radius: 4px;
   padding-left: 10px;
   height: 30px;
+  color: dimgray;
 }
 
 .input::placeholder {
   font-size: 15px;
+}
+
+.input:focus {
+  outline: none;
+  color: dimgray;
 }
 
 #btn-submit {
