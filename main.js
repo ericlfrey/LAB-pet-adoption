@@ -246,6 +246,7 @@ const catBtn = document.querySelector('#btn-cat');
 const dogBtn = document.querySelector('#btn-dog');
 const dinoBtn = document.querySelector('#btn-dino');
 const showAllBtn = document.querySelector('#btn-all');
+const formBtn = document.querySelector('#btn-form');
 const deleteBtn = document.querySelector('#btn-delete');
 const form = document.querySelector('form');
 
@@ -264,12 +265,38 @@ const cardsOnDom = (arr) => {
     <p class="pet-color">${pet.color}</p>
     <p class="pet-skill">${pet.specialSkill}</p>
     <div class="bottom-container">
-    <button id="delete-${pet.id}" type="button" class="btn btn-danger">Delete</button>
+    <button id="delete--${pet.id}" type="button" class="btn btn-danger">Delete</button>
     <p class="pet-type ${pet.type}">${pet.type}</p>
     </div>
 </div>`
   }
   renderToDom("#app", domString);
+}
+// Function to display Form
+const formOnDom = () => {
+  const formStr = `<h6>Add a pet:</h6>
+  <div class="form-group">
+    <input id="name" class="input" type="text" placeholder="Name:" required autocomplete="off"
+    >
+  </div>
+  <div class="form-group">
+    <input id="color" class="input" type="text" placeholder="Color:" required autocomplete="off"
+    >
+  </div>
+  <div class="form-group">
+    <input id="specialSkill" class="input" type="text" placeholder="Special Skill:" required autocomplete="off"
+    >
+  </div>
+  <div class="form-group">
+    <input id="type" class="input" type="text" placeholder="Type:" required autocomplete="off"
+    >
+  </div>
+  <div class="form-group">
+    <input id="imageUrl" class="input" type="text" placeholder="Image URL:" required autocomplete="off"
+    >
+  </div>
+  <button id="btn-submit" type="submit" class="btn">Add</button>`;
+  renderToDom('#form', formStr);
 }
 // Function to filter pet by type
 const petFilter = (arr, petType) => {
@@ -291,6 +318,7 @@ const newPet = (event) => {
     type: document.querySelector("#type").value.toLowerCase(),
     imageUrl: document.querySelector("#imageUrl").value
   };
+  console.log('wtf');
   pets.push(petObj);
   cardsOnDom(pets);
   form.reset();
@@ -315,15 +343,14 @@ dinoBtn.addEventListener('click', () => {
 showAllBtn.addEventListener('click', () => {
   cardsOnDom(pets);
 })
-form.addEventListener('submit', newPet);
+
 app.addEventListener('click', (e) => {
   if (e.target.id.includes('delete')) {
-    const targetId = e.target.id;
-    const idNum = parseInt(targetId.replace(/\D/g, ''), 0);
-    const indexOfObj = pets.findIndex((object) => {
-      return object.id === idNum;
-    })
+    const [, id] = e.target.id.split("--");
+    const indexOfObj = pets.findIndex(obj => obj.id === Number(id));
     pets.splice(indexOfObj, 1);
     cardsOnDom(pets);
   }
 });
+form.addEventListener('submit', newPet);
+formBtn.addEventListener('click', formOnDom);
